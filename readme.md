@@ -30,23 +30,46 @@ LICENSE
 
 Copyright (c) 2018-2022 Florian Rienhardt (hazelfazel@bitnuts.de)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+and associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software
+is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or
+substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING
+BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 ABSTRACT
 ~~~~~~~~
 
-Sample driver demontrating how to implement a simple, kernel-only process and command line monitoring driver for Microsoft Windows.
+Sample driver demonstrating how to implement a simple, kernel-only process and command line
+monitoring driver for Microsoft Windows.
+
+The driver registers a callback routine to be called whenever a process is
+created or deleted. This driver can be used for process creation monitoring. You
+can easily expand the driver to also block process creation attempts for specific
+parents invoking new processes. This might help to mitigate against typical
+attacks origination from office, browser and media playing tools. E.g. ask yourself
+"why should my text editor, pdf viewer or browser start cmd.exe or powershell.exe"?
+	
+Please note, there exist techniques to bypass such process monitoring (in-memory
+attempts, reflective code loading). Hence, such a driver can only be _one_ part
+of a monitoring	and mitigation strategy. There is no claim to be bullet-proof!
 
 
 How to install and use
 ~~~~~~~~~~~~~~~~~~~~~~
 
-To install the driver, just go into the binaries path regarding your architecture of Windows. Then right-select the .inf and hit "install". You can use one of the cmd-scripts to start, stop, restart and uninstall the driver. The scripts are located in the project's root folder.
+To install the driver, just go into the binaries path regarding your architecture of Windows.
+Then right-select the .inf and hit "install". You can use one of the cmd-scripts to start,
+stop, restart and uninstall the driver. The scripts are located in the project's root folder.
 
 
 Logging
