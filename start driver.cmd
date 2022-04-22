@@ -1,0 +1,2 @@
+sc start CreateProcessNotifyEx
+pause

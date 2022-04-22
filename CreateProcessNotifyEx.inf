@@ -1,0 +1,80 @@
+;;;
+;;; CreateProcessNotifyEx Inf
+;;;
+
+[Version]
+Signature   = "$Windows NT$"
+Class       = "ActivityMonitor"                         ;This is determined by the work this filter driver does
+ClassGuid   = {b86dff51-a31e-4bac-b3cf-e8cfe75c9fc2}    ;This value is determined by the Class
+Provider    = %Manufacturer%
+DriverVer=10/14/2018,12.10.4.815
+CatalogFile = CreateProcessNotifyEx.cat
+
+[DestinationDirs]
+DriverFiles  = 12            ;%windir%\system32\drivers
+
+;;
+;; Default install sections
+;;
+
+[DefaultInstall]
+OptionDesc          = %ServiceDescription%
+CopyFiles           = DriverFiles
+
+[DefaultInstall.Services]
+AddService          = %ServiceName%,,Service
+
+;;
+;; Default uninstall sections
+;;
+
+[DefaultUninstall]
+DelFiles   = DriverFiles
+
+[DefaultUninstall.Services]
+DelService = %ServiceName%,0x200      ;Ensure service is stopped before deleting
+
+;
+; Services Section
+;
+
+[Service]
+DisplayName      = %ServiceName%
+Description      = %ServiceDescription%
+ServiceBinary    = %12%\%DriverName%.sys        ;%windir%\system32\drivers\
+ServiceType      = 1                            ;KERNEL_DRIVER
+StartType        = 3                            ;0=BOOT/1=KERNEL_INIT/2=SERVICE_AUTO_START/3=SERVICE_DEMAND_START
+ErrorControl     = 1                            ;SERVICE_ERROR_NORMAL
+LoadOrderGroup   = "Extended Base"
+AddReg           = AddRegistry
+
+;
+; Registry Modifications
+;
+
+[AddRegistry]
+HKR,,"DebugFlags",0x00010001 ,0x0
+
+;
+; Copy Files
+;
+
+[DriverFiles]
+%DriverName%.sys
+
+[SourceDisksFiles]
+CreateProcessNotifyEx.sys = 1,,
+
+[SourceDisksNames]
+1 = %DiskId1%,,,
+
+;;
+;; String Section
+;;
+
+[Strings]
+Manufacturer = "LoremIpsumDrivers Ltd."
+ServiceDescription = "CreateProcessNotify Routine Demonstration Driver"
+ServiceName = "CreateProcessNotifyEx"
+DriverName = "CreateProcessNotifyEx"
+DiskId1 = "CreateProcessNotifyEx Device Installation Disk"
