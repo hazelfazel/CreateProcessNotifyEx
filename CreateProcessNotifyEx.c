@@ -3,8 +3,8 @@
 	License:
 	~~~~~~~~
 	
-	Copyright (c) 2018	Florian Rienhardt (florian@excubits.com)
-						Excubits UG (haftungsbeschränkt)
+	Copyright (c) 2018	Florian Rienhardt
+				Excubits UG (haftungsbeschränkt)
 
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
